@@ -1,1 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nawar Nayeem | Research Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --panel: #141414;
+      --card: #1e1e1e;
+      --text: #f5f5f5;
+      --muted: #b8b8b8;
+      --accent: #e50914;
+      --accent-soft: rgba(229, 9, 20, 0.18);
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 36px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.92), rgba(0,0,0,0.55));
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .brand {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.96rem;
+      flex-wrap: wrap;
+    }
+
+    .hero {
+      min-height: 78vh;
+      padding: 72px 36px 42px;
+      display: flex;
+      align-items: end;
+      background:
+        linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.35) 70%, rgba(0,0,0,0.82) 100%),
+        radial-gradient(circle at top right, rgba(229,9,20,0.22), transparent 30%),
+        linear-gradient(135deg, #111 0%, #191919 50%, #090909 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .hero-content {
+      max-width: 760px;
+      padding-bottom: 24px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #f87171;
+      font-size: 0.78rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      margin: 0 0 18px;
+      max-width: 900px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #e6e6e6;
+      max-width: 720px;
+      margin-bottom: 22px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: #f3f3f3;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, opacity 0.2s ease, border 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-secondary {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    main { padding-bottom: 80px; }
+
+    .section {
+      padding: 28px 36px 8px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: 1.55rem;
+    }
+
+    .section p.section-note {
+      margin: 0;
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      border-color: rgba(229,9,20,0.35);
+      box-shadow: 0 22px 50px rgba(0,0,0,0.52);
+    }
+
+    .card-thumb {
+      min-height: 150px;
+      padding: 18px;
+      display: flex;
+      align-items: end;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.12)),
+        linear-gradient(135deg, rgba(229,9,20,0.32), rgba(255,255,255,0.06));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .thumb-tag {
+      display: inline-block;
+      padding: 6px 10px;
+      background: rgba(0,0,0,0.48);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: #f3f3f3;
+      font-weight: 700;
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .card-title {
+      margin: 0 0 8px;
+      font-size: 1.06rem;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      margin: 0 0 12px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .meta span {
+      font-size: 0.8rem;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #eaeaea;
+    }
+
+    .about-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 20px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .skills span {
+      background: rgba(229,9,20,0.12);
+      border: 1px solid rgba(229,9,20,0.25);
+      color: #ffd9dc;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+    }
+
+    .footer {
+      padding: 30px 36px 60px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 900px) {
+      .two-col { grid-template-columns: 1fr; }
+      .navbar { padding: 14px 18px; }
+      .hero, .section, .footer { padding-left: 18px; padding-right: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="brand">NAWAR NAYEEM</div>
+    <div class="nav-links">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#methods">Methods</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">Research Portfolio</div>
+      <h1>Using causal inference and machine learning to improve mental health research and policy.</h1>
+      <p class="subtitle">
+        I am a health economist and psychiatric epidemiology researcher studying suicidality, substance use,
+        treatment intensity, and health disparities through large-scale observational data, real-world evidence,
+        and advanced quantitative methods.
+      </p>
+      <div class="hero-meta">
+        <span class="pill">Health Economics</span>
+        <span class="pill">Psychiatric Epidemiology</span>
+        <span class="pill">Causal Inference</span>
+        <span class="pill">Machine Learning</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#research">Explore Research</a>
+        <a class="btn btn-secondary" href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="research">
+      <div class="section-head">
+        <h2>Featured Research</h2>
+        <p class="section-note">A selected set of projects reflecting your work in suicidality, cannabis, racial disparities, and machine learning.</p>
+      </div>
+      <div class="row">
+        <article class="card">
+          <div class="card-thumb"><span class="thumb-tag">Mental Health & Substance Use</span></div>
+          <div class="card-body">
+            <h3 class="card-title">Gender Differences in Concurrent Cannabis and Opioid Use Linked to Non-Fatal Suicidal Behaviors</h3>
+            <p class="card-desc">Examines how polysubstance use relates to suicidal behaviors and how risk differs by gender using population-level data.</p>
+            <div class="meta"><span>Journal of Psychiatric Research</span><span>2025</span><span>First Author</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-thumb"><span class="thumb-tag">Mediation Analysis</span></div>
+          <div class="card-body">
+            <h3 class="card-title">Cannabis as a Mediator Between Distress Factors and Non-Fatal Suicidal Behaviors</h3>
+            <p class="card-desc">Uses mediation analysis to understand how cannabis use links depression, pain, and suicidality, with a focus on gender differences.</p>
+            <div class="meta"><span>International Journal of Mental Health and Addiction</span><span>2025</span><span>Causal Pathways</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-thumb"><span class="thumb-tag">Health Disparities</span></div>
+          <div class="card-body">
+            <h3 class="card-title">Racial Disparities in Suicide Rates Across the United States</h3>
+            <p class="card-desc">A comparative analysis of non-Hispanic White and non-Hispanic Black populations highlighting persistent disparities in suicide mortality.</p>
+            <div class="meta"><span>Archives of Public Health</span><span>2025</span><span>Population Health</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-thumb"><span class="thumb-tag">Adolescent Mental Health</span></div>
+          <div class="card-body">
+            <h3 class="card-title">Bullying and Depression as Mediators Between Body Weight and Suicidality</h3>
+            <p class="card-desc">Investigates psychosocial mechanisms linking body weight and suicidal outcomes among adolescents.</p>
+            <div class="meta"><span>Journal of Affective Disorders</span><span>2025</span><span>Youth Mental Health</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="publications">
+      <div class="section-head">
+        <h2>Research Themes</h2>
+        <p class="section-note">Use these cards to route visitors toward your strongest areas of expertise.</p>
+      </div>
+      <div class="row">
+        <article class="card">
+          <div class="card-thumb"><span class="thumb-tag">Theme</span></div>
+          <div class="card-body">
+            <h3 class="card-title">Suicide, Self-Harm, and Behavioral Risk</h3>
+            <p class="card-desc">Research on suicidality, suicidal behaviors, psychiatric comorbidity, and behavioral pathways that increase risk across populations.</p>
+            <div class="meta"><span>Psychiatric Epidemiology</span><span>Risk Factors</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-thumb"><span class="thumb-tag">Theme</span></div>
+          <div class="card-body">
+            <h3 class="card-title">Cannabis, Opioids, and Polysubstance Use</h3>
+            <p class="card-desc">Studies examining how substance use patterns interact with pain, depression, and gender to influence mental health outcomes.</p>
+            <div class="meta"><span>Substance Use</span><span>Gender Differences</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-thumb"><span class="thumb-tag">Theme</span></div>
+          <div class="card-body">
+            <h3 class="card-title">Health Equity and Population Disparities</h3>
+            <p class="card-desc">Work on racial disparities, health inequities, and the role of policy and structural factors in shaping outcomes.</p>
+            <div class="meta"><span>Health Equity</span><span>Policy-Relevant</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-thumb"><span class="thumb-tag">Theme</span></div>
+          <div class="card-body">
+            <h3 class="card-title">AI, Risk Prediction, and Diagnostic Innovation</h3>
+            <p class="card-desc">Developing and evaluating machine learning approaches for ADHD, ASD, suicidality, and precision public health applications.</p>
+            <div class="meta"><span>Machine Learning</span><span>Clinical Decision Support</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="teaching">
+      <div class="section-head">
+        <h2>Teaching & Talks</h2>
+        <p class="section-note">A portfolio row for courses, guest lectures, and methods training.</p>
+      </div>
+      <div class="row">
+        <article class="card">
+          <div class="card-thumb"><span class="thumb-tag">Course</span></div>
+          <div class="card-body">
+            <h3 class="card-title">Health Economics</h3>
+            <p class="card-desc">Taught at undergraduate and doctoral levels with a focus on applied microeconometrics, policy evaluation, and health behavior.</p>
+            <div class="meta"><span>LSU</span><span>Applied Micro</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-thumb"><span class="thumb-tag">Course</span></div>
+          <div class="card-body">
+            <h3 class="card-title">Principles of Microeconomics</h3>
+            <p class="card-desc">Introductory teaching centered on intuitive explanations, inclusive pedagogy, and real-world policy examples.</p>
+            <div class="meta"><span>Undergraduate</span><span>Student-Centered</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-thumb"><span class="thumb-tag">Lecture</span></div>
+          <div class="card-body">
+            <h3 class="card-title">Causal Inference in Psychiatric Research</h3>
+            <p class="card-desc">Guest lectures and workshops on mediation, differences-in-differences, and interpretation of policy-relevant estimates.</p>
+            <div class="meta"><span>Causal Methods</span><span>Graduate Audience</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="methods">
+      <div class="section-head">
+        <h2>Methods & Data</h2>
+        <p class="section-note">Your technical toolkit and the kinds of data environments you work in.</p>
+      </div>
+      <div class="two-col">
+        <div class="about-box">
+          <h3 style="margin-top:0;">Quantitative Toolkit</h3>
+          <p style="color:var(--muted); margin-bottom: 8px;">
+            My work combines econometrics, epidemiologic methods, and machine learning to answer clinically and policy-relevant questions.
+          </p>
+          <div class="skills">
+            <span>Difference-in-Differences</span>
+            <span>Marginal Structural Models</span>
+            <span>Mediation Analysis</span>
+            <span>Target Trial Emulation</span>
+            <span>Gradient Boosting</span>
+            <span>SHAP</span>
+            <span>Logistic & Count Models</span>
+            <span>Survival Analysis</span>
+            <span>Panel Data</span>
+            <span>Fairness in ML</span>
+          </div>
+        </div>
+        <div class="about-box">
+          <h3 style="margin-top:0;">Data Experience</h3>
+          <p style="color:var(--muted); margin-bottom: 8px;">
+            Experience with national surveys, mortality registries, EHR-linked resources, administrative claims, and cloud-scale data workflows.
+          </p>
+          <div class="skills">
+            <span>All of Us</span>
+            <span>CDC WONDER</span>
+            <span>NSDUH</span>
+            <span>NHANES</span>
+            <span>BRFSS</span>
+            <span>SEER</span>
+            <span>EHR & Claims Data</span>
+            <span>BigQuery</span>
+            <span>Stata</span>
+            <span>R</span>
+            <span>Python</span>
+            <span>SAS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-head">
+        <h2>About</h2>
+      </div>
+      <div class="about-box">
+        <p style="margin-top:0; color:var(--muted); font-size: 1rem;">
+          I am an applied economist and interdisciplinary health researcher with a PhD in Economics from Lehigh University.
+          My work bridges health economics, psychiatric epidemiology, and machine learning to study suicidality, substance use,
+          diagnosis, and disparities in mental health outcomes. I previously worked as a Postdoctoral Fellow at Saint Louis University
+          and have taught health economics and microeconomics at the undergraduate and doctoral levels.
+        </p>
+        <p style="margin-bottom:0; color:var(--muted); font-size: 1rem;">
+          My academic mission is to develop rigorous, data-driven evidence that improves public health decision-making,
+          strengthens clinical understanding, and informs equitable policy.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-head">
+        <h2>Contact</h2>
+      </div>
+      <div class="about-box">
+        <p style="margin-top:0; color:var(--muted);">Replace the placeholder links below with your real contact details.</p>
+        <div class="skills">
+          <span>Email: your.email@domain.com</span>
+          <span>Google Scholar</span>
+          <span>GitHub</span>
+          <span>LinkedIn</span>
+          <span>CV PDF</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Built as a Netflix-style academic portfolio for GitHub Pages. Replace placeholders with your publication links, CV, and website image.
+  </footer>
+</body>
+</html>
 
